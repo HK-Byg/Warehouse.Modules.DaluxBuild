@@ -138,7 +138,7 @@
       "apiVersion": "2021-01-01",
       "name": "[format('{0}/web', variables('functionAppName'))]",
       "properties": {
-        "repoUrl": "https://github.com/Bygdrift/Warehouse.Modules.DaluxBuild",
+        "repoUrl": "https://github.com/HK-Byg/Warehouse.Modules.DaluxBuild",
         "branch": "master",
         "isManualIntegration": true
       },
