@@ -39,14 +39,15 @@ namespace Module.AppFunctions
             var projectContracts = await service.GetProjectsContractsAsync(projects);
             await new Refines.ProjectsContractsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectContracts);
 
-            var projectsApprovals = await service.GetProjectsApprovalsAsync(projects);
-            await new Refines.ProjectsApprovalsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsApprovals.ToList());
-
-            var projectsChecklists = await service.GetProjectsCheckListsAsync(projects);
-            await new Refines.ProjectsChecklistsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsChecklists.ToList());
-
             var projectsCompanies = await service.GetProjectsCompaniesAsync(projects);
             await new Refines.ProjectsCompaniesRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsCompanies);
+
+            //Disse tager over ti minutter at køre på store projekter, så for at bruge dem, skal projektet laves om til et Orchestration projekt
+            //var projectsApprovals = await service.GetProjectsApprovalsAsync(projects);
+            //await new Refines.ProjectsApprovalsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsApprovals.ToList());
+
+            //var projectsChecklists = await service.GetProjectsCheckListsAsync(projects);
+            //await new Refines.ProjectsChecklistsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsChecklists.ToList());
 
             await new Refines.Log(App, SaveToDataLake, SaveToDatabase).WriteLog();
 
