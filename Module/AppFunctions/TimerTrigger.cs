@@ -21,7 +21,11 @@ namespace Module.AppFunctions
         public bool SaveToDatabase { get; }
 
         [FunctionName(nameof(TimerTriggerAsync))]
-        public async Task TimerTriggerAsync([TimerTrigger("%ScheduleExpression%")] TimerInfo myTimer)
+        public async Task TimerTriggerAsync([TimerTrigger("%ScheduleExpression%"
+#if DEBUG
+            , RunOnStartup = true
+#endif
+            )] TimerInfo myTimer)
         {
             App.Log.LogInformation($"The module '{App.ModuleName}' is started");
             var service = new WebService(App, SaveToDataLake);
@@ -45,6 +49,8 @@ namespace Module.AppFunctions
             await new Refines.ProjectsCompaniesRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsCompanies);
 
             await new Refines.Log(App, SaveToDataLake, SaveToDatabase).WriteLog();
+
+            App.Log.LogInformation($"Loading completed. Errors: {App.Log.GetErrorsAndCriticals().Count()}");
         }
     }
 }

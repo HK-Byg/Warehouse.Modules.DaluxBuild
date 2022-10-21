@@ -21,6 +21,9 @@ namespace ModuleTests.ManipulateData
 
             await new Module.Refines.ProjectsRefine(App, saveToDataLake, saveToDb).Refine(projects);
 
+            var projectsChecklists = GetDataFromTestFile<ProjectChecklist>();
+            await new Module.Refines.ProjectsChecklistsRefine(App, saveToDataLake, saveToDb).Refine(projectsChecklists);
+
             var projectsUsers = GetDataFromTestFileAsProjectDictionary<ProjectUser>();
             await new Module.Refines.ProjectsUsersRefine(App, saveToDataLake, saveToDb).Refine(projectsUsers);
 
@@ -29,9 +32,6 @@ namespace ModuleTests.ManipulateData
 
             var projectsApprovals = GetDataFromTestFile<ProjectApproval>();
             await new Module.Refines.ProjectsApprovalsRefine(App, saveToDataLake, saveToDb).Refine(projectsApprovals);
-
-            var projectsChecklists = GetDataFromTestFile<ProjectChecklist>();
-            await new Module.Refines.ProjectsChecklistsRefine(App, saveToDataLake, saveToDb).Refine(projectsChecklists);
 
             var projectsCompanies = GetDataFromTestFileAsProjectDictionary<ProjectCompany>();
             await new Module.Refines.ProjectsCompaniesRefine(App, saveToDataLake, saveToDb).Refine(projectsCompanies);

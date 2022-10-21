@@ -29,29 +29,29 @@ namespace Module.Refines
         private Csv CreateCsv(List<ProjectChecklist> projectsChecklists)
         {
             App.CsvConfig.FormatKind = FormatKind.TimeOffsetDST;
-            var csv = new Csv("BuildingObjectInfo, ChecklistId, Closed, CreatedByUserMail, CreatedByUserID, CreatedByCompanyName, CreatedByCompanyID, CreatedByDateTime," +
-                "IsDeleted, LastModifiedByUserMail, LastModifiedByUserID, LastModifiedByCompanyName, LastModifiedByCompanyID, LastModifiedDateTime, ProjectID, ProjectName, ProjectNumber, Safety, LocationList, ExtensionsDataList, ViewPointImageList");
+            var csv = new Csv("ChecklistId, Closed, CreatedByUserMail, CreatedByUserID, CreatedByCompanyName, CreatedByCompanyID, CreatedByDateTime," +
+                "IsDeleted, LastModifiedByUserMail, LastModifiedByUserID, LastModifiedByCompanyName, LastModifiedByCompanyID, LastModifiedDateTime, ProjectID, ProjectName, ProjectNumber, Safety, BuildingObjectInfo, LocationList, ExtensionsDataList, ViewPointImageList");
 
             int r = 1;
             foreach (var checklist in projectsChecklists)
-                csv.AddRecord(r, 1, checklist.BuildingObjectInfo)
-                   .AddRecord(r, 2, checklist.ChecklistID?.ID)
-                   .AddRecord(r, 3, checklist.Closed)
-                   .AddRecord(r, 4, checklist.CreatedByUser.EmailAddress)
-                   .AddRecord(r, 5, checklist.CreatedByUser.UserID?.ID)
-                   .AddRecord(r, 6, checklist.CreatedByUser.Company.Name)
-                   .AddRecord(r, 7, checklist.CreatedByUser.Company.CompanyID?.ID)
-                   .AddRecord(r, 8, checklist.CreatedDateTime)
-                   .AddRecord(r, 9, checklist.IsDeleted)
-                   .AddRecord(r, 10, checklist.LastModifiedByUser.EmailAddress)
-                   .AddRecord(r, 11, checklist.LastModifiedByUser.UserID?.ID)
-                   .AddRecord(r, 12, checklist.LastModifiedByUser.Company.Name)
-                   .AddRecord(r, 13, checklist.LastModifiedByUser.Company.CompanyID?.ID)
-                   .AddRecord(r, 14, checklist.LastModifiedDateTime)
-                   .AddRecord(r, 15, checklist.Project.ProjectID?.ID)
-                   .AddRecord(r, 16, checklist.Project.Name)
-                   .AddRecord(r, 17, checklist.Project.Number)
-                   .AddRecord(r, 18, checklist.Safety)
+                csv.AddRecord(r, 1, checklist.ChecklistID?.ID)
+                   .AddRecord(r, 2, checklist.Closed)
+                   .AddRecord(r, 3, checklist.CreatedByUser.EmailAddress)
+                   .AddRecord(r, 4, checklist.CreatedByUser.UserID?.ID)
+                   .AddRecord(r, 5, checklist.CreatedByUser.Company?.Name)
+                   .AddRecord(r, 6, checklist.CreatedByUser.Company?.CompanyID?.ID)
+                   .AddRecord(r, 7, checklist.CreatedDateTime)
+                   .AddRecord(r, 8, checklist.IsDeleted)
+                   .AddRecord(r, 9, checklist.LastModifiedByUser.EmailAddress)
+                   .AddRecord(r, 10, checklist.LastModifiedByUser.UserID?.ID)
+                   .AddRecord(r, 11, checklist.LastModifiedByUser.Company?.Name)
+                   .AddRecord(r, 12, checklist.LastModifiedByUser.Company?.CompanyID?.ID)
+                   .AddRecord(r, 13, checklist.LastModifiedDateTime)
+                   .AddRecord(r, 14, checklist.Project.ProjectID?.ID)
+                   .AddRecord(r, 15, checklist.Project.Name)
+                   .AddRecord(r, 16, checklist.Project.Number)
+                   .AddRecord(r, 17, checklist.Safety)
+                   .AddRecord(r, 18, JsonConvert.SerializeObject(checklist.BuildingObjectInfo))
                    .AddRecord(r, 19, JsonConvert.SerializeObject(checklist.LocationList))
                    .AddRecord(r, 20, JsonConvert.SerializeObject(checklist.ExtensionsDataList))
                    .AddRecord(r++, 21, JsonConvert.SerializeObject(checklist.ViewPointImageList));   

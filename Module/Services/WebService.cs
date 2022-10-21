@@ -28,6 +28,7 @@ namespace Module.Services
 
         public async Task<List<Project>> GetProjectsAsync()
         {
+            App.Log.LogInformation("Fething projects...");
             var response = await Client.GetAsync("projects");
             var content = await GetContent(response);
             if (content == null)
@@ -39,6 +40,7 @@ namespace Module.Services
 
         public async Task<IEnumerable<ProjectApproval>> GetProjectsApprovalsAsync(List<Project> projects)
         {
+            App.Log.LogInformation("Fething projectApprovals...");
             var projectIds = projects?.Select(o => o.ProjectID.ID)?.ToArray();
             if (!projectIds.Any())
                 return default;
@@ -54,6 +56,7 @@ namespace Module.Services
 
         public async Task<IEnumerable<ProjectChecklist>> GetProjectsCheckListsAsync(List<Project> projects)
         {
+            App.Log.LogInformation("Fething projectChecklists...");
             var projectIds = projects?.Select(o => o.ProjectID.ID)?.ToArray();
             if (!projectIds.Any())
                 return default;
@@ -69,16 +72,19 @@ namespace Module.Services
 
         public async Task<Dictionary<string, List<ProjectCompany>>> GetProjectsCompaniesAsync(List<Project> projects)
         {
+            App.Log.LogInformation("Fething projectCompanies...");
             return await GetProjectsPackagesAsync<ProjectCompany>(projects, "companies");
         }
 
         public async Task<Dictionary<string, List<ProjectContract>>> GetProjectsContractsAsync(List<Project> projects)
         {
+            App.Log.LogInformation("Fething projectContracts...");
             return await GetProjectsPackagesAsync<ProjectContract>(projects, "contracts");
         }
 
         public async Task<Dictionary<string, List<ProjectUser>>> GetProjectsUsersAsync(List<Project> projects)
         {
+            App.Log.LogInformation("Fething projectUsers...");
             return await GetProjectsPackagesAsync<ProjectUser>(projects, "users");
         }
 

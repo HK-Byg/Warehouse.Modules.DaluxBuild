@@ -11,7 +11,7 @@ namespace Module.Services.Models
 
     public class ProjectChecklist
     {
-        public object BuildingObjectInfo { get; set; }
+        public Buildingobjectinfo BuildingObjectInfo { get; set; }
         public GenericId ChecklistID { get; set; }
         public string ChecklistName { get; set; }
         public string ChecklistNumber { get; set; }
@@ -28,11 +28,33 @@ namespace Module.Services.Models
         public Viewpointimagelist[] ViewPointImageList { get; set; }
     }
 
+    public class Buildingobjectinfo
+    {
+        public string ClassificationID { get; set; }
+        public string ClassificationName { get; set; }
+        public string ComponentTypeID { get; set; }
+        public string ComponentTypeName { get; set; }
+        public string ModelID { get; set; }
+        public DateTime ModelUploadedDateTime { get; set; }
+        public string ObjectID { get; set; }
+        public string ObjectName { get; set; }
+    }
+
     public class Extensionsdatalist
+    {
+        public GenericId[] AttachedIssues { get; set; }
+        public string Comment { get; set; }
+        public Medialist[] MediaList { get; set; }
+        public string Name { get; set; }
+        public Repeatablefield[] RepeatableFields { get; set; }
+        public string Value { get; set; }
+    }
+
+    public class Repeatablefield
     {
         public object[] AttachedIssues { get; set; }
         public string Comment { get; set; }
-        public Medialist[] MediaList { get; set; }
+        public object[] MediaList { get; set; }
         public string Name { get; set; }
         public object RepeatableFields { get; set; }
         public string Value { get; set; }

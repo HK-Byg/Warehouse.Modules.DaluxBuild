@@ -17,6 +17,7 @@ namespace Module.Refines
 
         public async Task WriteLog()
         {
+            App.Log.LogInformation("Writing log...");
             App.CsvConfig.FormatKind = FormatKind.TimeOffsetDST;
             var errors = App.Log.GetErrorsAndCriticals();
             var errorsDetails = string.Empty;

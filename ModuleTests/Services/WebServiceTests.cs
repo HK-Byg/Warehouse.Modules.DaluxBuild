@@ -33,6 +33,10 @@ namespace ModuleTests.Refines
             Assert.IsFalse(service.App.Log.HasErrorsOrCriticals());
             SaveToFile(projects, typeof(Project).Name);
 
+            var projectsChecklists = await service.GetProjectsCheckListsAsync(projects);
+            Assert.IsFalse(service.App.Log.HasErrorsOrCriticals());
+            SaveToFile(projectsChecklists, typeof(ProjectChecklist).Name);
+
             var projectUsers = await service.GetProjectsUsersAsync(projects);
             Assert.IsFalse(service.App.Log.HasErrorsOrCriticals());
             SaveToFile(projectUsers, typeof(ProjectUser).Name);
@@ -40,11 +44,7 @@ namespace ModuleTests.Refines
             var projectsApprovals = await service.GetProjectsApprovalsAsync(projects);
             Assert.IsFalse(service.App.Log.HasErrorsOrCriticals());
             SaveToFile(projectsApprovals, typeof(ProjectApproval).Name);
-
-            var projectsChecklists = await service.GetProjectsCheckListsAsync(projects);
-            Assert.IsFalse(service.App.Log.HasErrorsOrCriticals());
-            SaveToFile(projectsChecklists, typeof(ProjectChecklist).Name);
-
+            
             var projectsCompanies = await service.GetProjectsCompaniesAsync(projects);
             Assert.IsFalse(service.App.Log.HasErrorsOrCriticals());
             SaveToFile(projectsCompanies, typeof(ProjectCompany).Name);
@@ -52,8 +52,6 @@ namespace ModuleTests.Refines
             var projectsContracts = await service.GetProjectsContractsAsync(projects);
             Assert.IsFalse(service.App.Log.HasErrorsOrCriticals());
             SaveToFile(projectsContracts, typeof(ProjectContract).Name);
-
-            
         }
 
         private static void SaveToFile<T>(IEnumerable<T> data, string fileName)
