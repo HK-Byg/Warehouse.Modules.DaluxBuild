@@ -28,14 +28,15 @@ namespace Module.Refines
         private Csv CreateCsv(Dictionary<string, List<ProjectContract>> projectsContracts)
         {
             App.CsvConfig.FormatKind = FormatKind.TimeOffsetDST;
-            var csv = new Csv("ProjectID, UserID, Email, Firstname, Lastname, CompanyID, CompanyName, CompanyVAT");
+            var csv = new Csv("ProjectID, ContractID, CompanyID, Name, Code");
             int r = 1;
             foreach (var item in projectsContracts)
                 foreach (var contract in item.Value)
                     csv.AddRecord(r, 1, item.Key)
                        .AddRecord(r, 2, contract.ContractID?.ID)
                        .AddRecord(r, 3, contract.CompanyID?.ID)
-                       .AddRecord(r++, 4, contract.Name);
+                       .AddRecord(r, 4, contract.Name)
+                       .AddRecord(r++, 5, contract.Code);
 
             return csv;
         }
