@@ -32,7 +32,11 @@ namespace Module.AppFunctions
 
             var projects = await service.GetProjectsAsync();
             await new Refines.ProjectsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projects);
-            
+
+            var projectsChecklists = await service.GetProjectsCheckListsAsync(projects);
+            await new Refines.ProjectsChecklistsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsChecklists.ToList());
+
+
             var projectUsers = await service.GetProjectsUsersAsync(projects);
             await new Refines.ProjectsUsersRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectUsers);
 
@@ -42,13 +46,10 @@ namespace Module.AppFunctions
             var projectsCompanies = await service.GetProjectsCompaniesAsync(projects);
             await new Refines.ProjectsCompaniesRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsCompanies);
 
-            //Disse tager over ti minutter at køre på store projekter, så for at bruge dem, skal projektet laves om til et Orchestration projekt
+            //Disse to tager over ti minutter at køre på store projekter, så for at bruge dem, skal projektet laves om til et Orchestration projekt
             //var projectsApprovals = await service.GetProjectsApprovalsAsync(projects);
             //await new Refines.ProjectsApprovalsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsApprovals.ToList());
-
-            //var projectsChecklists = await service.GetProjectsCheckListsAsync(projects);
-            //await new Refines.ProjectsChecklistsRefine(App, SaveToDataLake, SaveToDatabase).Refine(projectsChecklists.ToList());
-
+            
             await new Refines.Log(App, SaveToDataLake, SaveToDatabase).WriteLog();
 
             App.Log.LogInformation($"Loading completed. Errors: {App.Log.GetErrorsAndCriticals().Count()}");

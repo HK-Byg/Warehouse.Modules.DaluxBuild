@@ -30,7 +30,6 @@ namespace ModuleTests.ManipulateData
             var projectsUsers = GetDataFromTestFileAsProjectDictionary<ProjectUser>();
             await new Module.Refines.ProjectsUsersRefine(App, saveToDataLake, saveToDb).Refine(projectsUsers);
 
-
             var projectsApprovals = GetDataFromTestFile<ProjectApproval>();
             await new Module.Refines.ProjectsApprovalsRefine(App, saveToDataLake, saveToDb).Refine(projectsApprovals);
 

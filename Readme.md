@@ -13,6 +13,10 @@ By saving data to a MS SQL database, it is:
 
 All modules can be installed and facilitated with ARM templates (Azure Resource Management): [Use ARM templates to setup and maintain this module](https://github.com/HK-Byg/Warehouse.Modules.DaluxBuild/blob/master/Deploy).
 
+## Contact
+
+For information or consultant hours, please write to bygdrift@gmail.com.
+
 ## Database content
 
 | TABLE_NAME        | COLUMN_NAME                   | DATA_TYPE      |
